@@ -10,6 +10,10 @@
         <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}" width="300">
     {% endif %}
 
+<form action="{{ url_for('favorite_recipe', recipe_id=recipe.id) }}" method="POST">
+    <button type="submit">Add to Favorites</button>
+</form>
+
     <hr>
     <h3>
         Comments
