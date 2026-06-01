@@ -103,6 +103,17 @@ def favorite_recipe(recipe_id):
     flash("Recipe added to favorites!", "success")
     return redirect(url_for("recipe_detail", recipe_id=recipe.id))
 
+@app.route("/remove-favorite/<int:recipe_id>", methods=["POST"])
+@login_required
+def remove_favorite(recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)
+    favorite = Favorite.query.filter_by(user_id=current_user.id, recipe_id=recipe.id).first()
+    if favorite:
+        db.session.delete(favorite)
+        db.session.commit()
+        flash("Recipe removed from favorites.", "success")
+    return redirect(url_for("recipe_detail", recipe_id=recipe.id))
+
 @app.route("/favorites")
 @login_required
 def favorites():
