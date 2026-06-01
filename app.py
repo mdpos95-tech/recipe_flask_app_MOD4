@@ -85,6 +85,21 @@ def recipe_detail(recipe_id):
         return redirect(url_for("recipe_detail", recipe_id=recipe.id))
     return render_template("recipe_detail.html", recipe=recipe, form=form)
 
+@app.route("/favorite/<int:recipe_id>", methods=["POST"])
+@login_required
+def favorite_recipe(recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)
+    favorite = Favorite(
+    user_id=current_user.id,
+    recipe_id=recipe.id
+    )
+    db.session.add(favorite)
+    db.session.commit()
+    flash("Recipe added to favorites!", "success")
+    return redirect(url_for("recipe_detail", recipe_id=recipe.id))
+
+
+
 @app.route("/delete-recipe/<int:recipe_id>")
 @login_required
 def delete_recipe(recipe_id):
