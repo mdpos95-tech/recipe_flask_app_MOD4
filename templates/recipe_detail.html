@@ -14,6 +14,16 @@
     <h3>
         Comments
     </h3>
+
+    {% for comment in recipe.comments %}
+            <p><strong>{{ comment.author.username }}:</strong></p>
+            <p> {{ comment.message }}</p>
+            <hr>
+            {% else %}
+            <p>No comments yet. Be the first to comment!</p>
+       
+    {% endfor %}
+    <h4>Add a Comment</h4>
     <form method="POST">
         {{ form.hidden_tag() }}
         <p>

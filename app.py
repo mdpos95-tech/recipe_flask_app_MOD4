@@ -68,21 +68,35 @@ def recipes():
     all_recipes = Recipe.query.all()
     return render_template("recipes.html", recipes=all_recipes) 
 
-@app.route("/recipe/<int:recipe_id>")
+@app.route("/recipe/<int:recipe_id>", methods=["GET", "POST"])
+@login_required
 def recipe_detail(recipe_id):
     form = CommentForm()
     recipe = Recipe.query.get_or_404(recipe_id)
+    if form.validate_on_submit():
+        comment = Comment(
+            message=form.message.data,
+            user_id=current_user.id,
+            recipe_id=recipe.id
+        )
+        db.session.add(comment)
+        db.session.commit()
+        flash("Comment posted successfully!", "success")
+        return redirect(url_for("recipe_detail", recipe_id=recipe.id))
     return render_template("recipe_detail.html", recipe=recipe, form=form)
 
 @app.route("/delete-recipe/<int:recipe_id>")
+@login_required
 def delete_recipe(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
+    Comment.query.filter_by(recipe_id=recipe.id).delete()
     db.session.delete(recipe)
     db.session.commit()
     flash("Recipe deleted successfully!", "success")
     return redirect(url_for("recipes"))
 
 @app.route("/add-recipe", methods=["GET", "POST"])
+@login_required
 def add_recipe():
     form = RecipeForm()
     form.category_id.choices = [(c.id, c.name) for c in Category.query.all()]
