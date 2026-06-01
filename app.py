@@ -98,13 +98,18 @@ def favorite_recipe(recipe_id):
     flash("Recipe added to favorites!", "success")
     return redirect(url_for("recipe_detail", recipe_id=recipe.id))
 
-
+@app.route("/favorites")
+@login_required
+def favorites():
+    favorite_recipes = Recipe.query.join(Favorite).filter(Favorite.user_id == current_user.id).all()
+    return render_template("favorites.html", favorites=favorite_recipes)
 
 @app.route("/delete-recipe/<int:recipe_id>")
 @login_required
 def delete_recipe(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
     Comment.query.filter_by(recipe_id=recipe.id).delete()
+    Favorite.query.filter_by(recipe_id=recipe.id).delete()
     db.session.delete(recipe)
     db.session.commit()
     flash("Recipe deleted successfully!", "success")
