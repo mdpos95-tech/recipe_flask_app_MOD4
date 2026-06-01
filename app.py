@@ -84,13 +84,16 @@ def delete_recipe(recipe_id):
 @app.route("/add-recipe", methods=["GET", "POST"])
 def add_recipe():
     form = RecipeForm()
+    form.category_id.choices = [(c.id, c.name) for c in Category.query.all()]
+
     if form.validate_on_submit():
         recipe = Recipe(
             title=form.title.data,
-            category=form.category.data,
             ingredients=form.ingredients.data,
             instructions=form.instructions.data,
-            image_url=form.image_url.data
+            image_url=form.image_url.data,
+            user_id=current_user.id,
+            category_id=form.category_id.data
         )
         db.session.add(recipe)
         db.session.commit()
