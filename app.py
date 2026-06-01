@@ -89,11 +89,16 @@ def recipe_detail(recipe_id):
 @login_required
 def favorite_recipe(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
-    favorite = Favorite(
-    user_id=current_user.id,
-    recipe_id=recipe.id
-    )
-    db.session.add(favorite)
+    existing_favorite = Favorite.query.filter_by(user_id=current_user.id, recipe_id=recipe.id).first()
+    if existing_favorite:
+        flash("You have already favorited this recipe.", "info")
+        return redirect(url_for("recipe_detail", recipe_id=recipe.id))
+    else:
+        favorite = Favorite(
+            user_id=current_user.id,
+            recipe_id=recipe.id
+        )
+        db.session.add(favorite)
     db.session.commit()
     flash("Recipe added to favorites!", "success")
     return redirect(url_for("recipe_detail", recipe_id=recipe.id))
