@@ -70,8 +70,9 @@ def recipes():
 
 @app.route("/recipe/<int:recipe_id>")
 def recipe_detail(recipe_id):
+    form = CommentForm()
     recipe = Recipe.query.get_or_404(recipe_id)
-    return render_template("recipe_detail.html", recipe=recipe)
+    return render_template("recipe_detail.html", recipe=recipe, form=form)
 
 @app.route("/delete-recipe/<int:recipe_id>")
 def delete_recipe(recipe_id):
