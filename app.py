@@ -31,6 +31,14 @@ def recipe_detail(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
     return render_template("recipe_detail.html", recipe=recipe)
 
+@app.route("/delete-recipe/<int:recipe_id>")
+def delete_recipe(recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)
+    db.session.delete(recipe)
+    db.session.commit()
+    flash("Recipe deleted successfully!", "success")
+    return redirect(url_for("recipes"))
+
 @app.route("/add-recipe", methods=["GET", "POST"])
 def add_recipe():
     form = RecipeForm()
