@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template, redirect, url_for, flash
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from dotenv import load_dotenv
 from flask_migrate import Migrate
 from models import db, User, Category, Recipe, Comment, Favorite, ContactMessage
@@ -16,7 +17,6 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
 migrate = Migrate(app, db)
-from flask_login import LoginManager
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
@@ -49,7 +49,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user and user.check_password(form.password.data):
+        if user and user.password_hash == form.password.data:
             login_user(user)
             flash("Login successful!", "success")
             return redirect(url_for("home"))
