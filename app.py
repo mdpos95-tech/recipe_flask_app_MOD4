@@ -2,8 +2,8 @@ import os
 from flask import Flask, render_template, redirect, url_for, flash
 from dotenv import load_dotenv
 from flask_migrate import Migrate
-from models import db, Recipe, ContactMessage
-from forms import RecipeForm, ContactForm
+from models import db, User, Category, Recipe, Comment, Favorite, ContactMessage
+from forms import RegisterForm, LoginForm, RecipeForm, CommentForm, ContactForm
 
 load_dotenv()
 
@@ -16,10 +16,20 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
 migrate = Migrate(app, db)
+from flask_login import LoginManager
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 @app.route("/")
 def home():
     return render_template("home.html")
+
+@app.route("/register", methods=["GET", "POST"])
 
 @app.route("/recipes")
 def recipes():
