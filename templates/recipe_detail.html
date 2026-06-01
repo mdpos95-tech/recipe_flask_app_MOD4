@@ -2,6 +2,7 @@
 
 {%- block content -%}
     <h1>{{ recipe.title }}</h1>
+    <p><strong>Created by:</strong> {{ recipe.author.username }}</p>
     <p><strong>Category:</strong> {{ recipe.category.name }}</p>
     <p><strong>Ingredients:</strong><br>{{ recipe.ingredients }}</p>
     <p><strong>Instructions:</strong><br>{{ recipe.instructions }}</p>
