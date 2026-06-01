@@ -26,6 +26,11 @@ def recipes():
     all_recipes = Recipe.query.all()
     return render_template("recipes.html", recipes=all_recipes) 
 
+@app.route("/recipe/<int:recipe_id>")
+def recipe_detail(recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)
+    return render_template("recipe_detail.html", recipe=recipe)
+
 @app.route("/add-recipe", methods=["GET", "POST"])
 def add_recipe():
     form = RecipeForm()
