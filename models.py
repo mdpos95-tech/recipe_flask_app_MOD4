@@ -31,10 +31,19 @@ class Recipe(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable=False)
 
+    comments = db.relationship("Comment", backref="recipe", lazy=True)
+    favorites = db.relationship("Favorite", backref="recipe", lazy=True)
+
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)    
+
+class Favorite(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)    
