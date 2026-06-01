@@ -30,8 +30,13 @@ def recipes():
 def add_recipe():
     form = RecipeForm()
     if form.validate_on_submit():
-        recipe = Recipe()
-        form.populate_obj(recipe)
+        recipe = Recipe(
+            title=form.title.data,
+            category=form.category.data,
+            ingredients=form.ingredients.data,
+            instructions=form.instructions.data,
+            image_url=form.image_url.data
+        )
         db.session.add(recipe)
         db.session.commit()
         flash("Recipe added successfully!", "success")
