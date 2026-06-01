@@ -26,5 +26,17 @@ def recipes():
     all_recipes = Recipe.query.all()
     return render_template("recipes.html", recipes=all_recipes) 
 
+@app.route("/add-recipe", methods=["GET", "POST"])
+def add_recipe():
+    form = RecipeForm()
+    if form.validate_on_submit():
+        recipe = Recipe()
+        form.populate_obj(recipe)
+        db.session.add(recipe)
+        db.session.commit()
+        flash("Recipe added successfully!", "success")
+        return redirect(url_for("recipes"))
+    return render_template("add_recipe.html", form=form)
+
 if __name__ == "__main__":
     app.run(debug=True)
