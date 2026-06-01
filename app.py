@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from dotenv import load_dotenv
 from flask_migrate import Migrate
@@ -61,7 +61,7 @@ def login():
 def logout():
     logout_user()
     flash("You have been successfully logged out.", "success")
-    return redirect(url_for("home"))
+    return redirect(url_for("recipes"))
 
 @app.route("/recipes")
 def recipes():
@@ -151,6 +151,29 @@ def add_recipe():
         flash("Recipe added successfully!", "success")
         return redirect(url_for("recipes"))
     return render_template("add_recipe.html", form=form)
+
+@app.route("/edit-recipe/<int:recipe_id>", methods=["GET", "POST"])
+@login_required
+def edit_recipe(recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)
+    form = RecipeForm()
+    form.category_id.choices = [(c.id, c.name) for c in Category.query.all()]
+    if form.validate_on_submit():
+        recipe.title = form.title.data
+        recipe.ingredients = form.ingredients.data
+        recipe.instructions = form.instructions.data
+        recipe.image_url = form.image_url.data
+        recipe.category_id = form.category_id.data
+        db.session.commit()
+        flash("Recipe updated successfully!", "success")
+        return redirect(url_for("recipe_detail", recipe_id=recipe.id))
+    if request.method == "GET":
+        form.title.data = recipe.title
+        form.ingredients.data = recipe.ingredients
+        form.instructions.data = recipe.instructions
+        form.image_url.data = recipe.image_url
+        form.category_id.data = recipe.category_id
+    return render_template("edit_recipe.html", form=form)
 
 if __name__ == "__main__":
     app.run(debug=True)
