@@ -124,6 +124,9 @@ def favorites():
 @login_required
 def delete_recipe(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
+    if recipe.user != current_user:
+        flash("You do not have permission to delete this recipe.", "danger")
+        return redirect(url_for("recipe_detail", recipe_id=recipe.id))
     Comment.query.filter_by(recipe_id=recipe.id).delete()
     Favorite.query.filter_by(recipe_id=recipe.id).delete()
     db.session.delete(recipe)
@@ -156,6 +159,9 @@ def add_recipe():
 @login_required
 def edit_recipe(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
+    if recipe.user != current_user:
+        flash("You do not have permission to edit this recipe.", "danger")
+        return redirect(url_for("recipe_detail", recipe_id=recipe.id))
     form = RecipeForm()
     form.category_id.choices = [(c.id, c.name) for c in Category.query.all()]
     if form.validate_on_submit():
