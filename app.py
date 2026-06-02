@@ -191,5 +191,16 @@ def edit_recipe(recipe_id):
         form.category_id.data = recipe.category_id
     return render_template("add_recipe.html", form=form)
 
+    @app.route('/admin')
+    @login_required
+    def admin():
+
+        user_count = User.query.count()
+        recipe_count = Recipe.query.count()
+        category_count = Category.query.count()
+
+        return render_template('admin.html', user_count=user_count, recipe_count=recipe_count, category_count=category_count)
+    
+       
 if __name__ == "__main__":
     app.run(debug=True)
