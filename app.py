@@ -65,8 +65,17 @@ def logout():
 
 @app.route("/recipes")
 def recipes():
-    all_recipes = Recipe.query.all()
-    return render_template("recipes.html", recipes=all_recipes) 
+    search = request.args.get("search")
+    category_id = request.args.get("category")
+    query = Recipe.query
+    if search:
+        query = query.filter(Recipe.title.ilike(f"%{search}%"))
+    if category_id:
+        query=query.filter(Recipe.category_id == category_id)
+    all_recipes = query.all()
+    categories = Category.query.all()
+    return render_template("recipes.html", recipes=all_recipes, search=search, categories=categories, selected_category=category_id)
+
 
 @app.route("/recipe/<int:recipe_id>", methods=["GET", "POST"])
 @login_required
