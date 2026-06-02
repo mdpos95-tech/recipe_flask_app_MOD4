@@ -18,11 +18,24 @@
 
         <a href="{{ url_for('recipe_detail', recipe_id=recipe.id) }}">{{ recipe.title }}</a>
     </h2>
+    {% if recipe.image_url %}
+    <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}" class="recipe-image">
+    {% endif %}
     <p><strong>Created by:</strong> {{ recipe.author.username }}</p>
     <p><strong>Created on:</strong> {{ recipe.created_at.strftime('%d-%m-%Y') }}</p>
     <p><strong>Category:</strong> {{ recipe.category.name }}</p>
-    <p><strong>Ingredients:</strong><br>{{ recipe.ingredients }}</p>
-    <p><strong>Instructions:</strong><br>{{ recipe.instructions }}</p>
+    <p><strong>Ingredients:</strong></p>
+    <ul>
+        {% for ingredient in recipe.ingredients.split('\n') %}
+        <li>{{ ingredient }}</li>
+        {% endfor %}
+    </ul>
+    <p><strong>Instructions:</strong></p>
+    <ul>
+        {% for step in recipe.instructions.split('\n') %}
+        <li>{{ step }}</li>
+        {% endfor %}
+    </ul>
    </div>
    {% endfor %}
 {% endblock %}
