@@ -32,8 +32,9 @@
     <form method="POST">
         {{ form.hidden_tag() }}
         <p>
-            {{ form.message.label }} <br> {{ form.message(rows=4) }}
+            {{ form.message.label }} <br> {{ form.message(id="comment-box",rows=4, maxlength="200") }}
         </p>
+        <p>Characters remaining: <span id="char-count">200</span></p>
         {{ form.submit() }}
     </form>
     {% if current_user.is_authenticated and recipe.author == current_user %}
