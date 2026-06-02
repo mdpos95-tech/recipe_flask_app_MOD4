@@ -2,7 +2,7 @@
 
 {% block content %}
 
-
+<div class="hero">
 <h1>The Kitchen Collective</h1>
 
 <h3>
@@ -14,7 +14,8 @@
 </p>
 
 <p>
-    <a href="{{ url_for('recipes') }}">Explore Recipes</a>
+    <a href="{{ url_for('recipes') }}" class="hero-button">Explore Recipes</a>
 
 </p>
+</div>
 {% endblock %}

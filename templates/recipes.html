@@ -31,11 +31,11 @@
         {% endfor %}
     </ul>
     <p><strong>Instructions:</strong></p>
-    <ul>
+    <ol>
         {% for step in recipe.instructions.split('\n') %}
         <li>{{ step }}</li>
         {% endfor %}
-    </ul>
+    </ol>
    </div>
    {% endfor %}
 {% endblock %}
