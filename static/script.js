@@ -9,3 +9,16 @@ setTimeout(function() {
     }); 
 }, 3000);
 
+document.addEventListener('DOMContentLoaded', function() {
+    const commentBox = document.getElementById('comment-box');
+    const charCount = document.getElementById('char-count');
+    const maxChars = 200;
+
+    if (commentBox && charCount) {
+        commentBox.addEventListener('input', function() {
+            const remaining = maxChars - commentBox.value.length;
+            charCount.textContent = `${remaining} characters remaining`;
+        });
+    }
+});
+
