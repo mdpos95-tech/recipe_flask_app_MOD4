@@ -15,8 +15,11 @@
 {% for recipe in recipes %}
 <div class="recipe">
     <h2>
+
         <a href="{{ url_for('recipe_detail', recipe_id=recipe.id) }}">{{ recipe.title }}</a>
     </h2>
+    <p><strong>Created by:</strong> {{ recipe.author.username }}</p>
+    <p><strong>Created on:</strong> {{ recipe.created_at.strftime('%d-%m-%Y') }}</p>
     <p><strong>Category:</strong> {{ recipe.category.name }}</p>
     <p><strong>Ingredients:</strong><br>{{ recipe.ingredients }}</p>
     <p><strong>Instructions:</strong><br>{{ recipe.instructions }}</p>
