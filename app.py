@@ -189,7 +189,7 @@ def edit_recipe(recipe_id):
         form.instructions.data = recipe.instructions
         form.image_url.data = recipe.image_url
         form.category_id.data = recipe.category_id
-    return render_template("edit_recipe.html", form=form)
+    return render_template("add_recipe.html", form=form)
 
 if __name__ == "__main__":
     app.run(debug=True)
