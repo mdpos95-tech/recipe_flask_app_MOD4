@@ -208,3 +208,12 @@ select{
     display: none;
     margin-top: 20px;
 }
+
+.admin-table{
+    width: 60%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    
+}
