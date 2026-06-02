@@ -22,3 +22,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.toggle-details');
+    buttons.forEach(function(button) {        button.addEventListener('click', function() {
+            const details = this.nextElementSibling;
+            if (details.style.display === 'block') {
+                details.style.display = 'none';
+                this.textContent = 'Show Recipe Details';
+            } else {
+                details.style.display = 'block';
+                this.textContent = 'Hide Recipe Details';
+            }     });
+    });
+});

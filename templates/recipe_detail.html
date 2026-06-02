@@ -2,16 +2,30 @@
 
 {%- block content -%}
     <h1>{{ recipe.title }}</h1>
+     {% if recipe.image_url %}
+        <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}" width="300">
+    {% endif %}
+
     <div class="recipe-meta">
         <p><strong>Created by:</strong> {{ recipe.author.username }}</p>
         <p><strong>Category:</strong> {{ recipe.category.name }}</p>
     </div>
-    <p><strong>Ingredients:</strong><br>{{ recipe.ingredients }}</p>
-    <p><strong>Instructions:</strong><br>{{ recipe.instructions }}</p>
-
-    {% if recipe.image_url %}
-        <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}" width="300">
-    {% endif %}
+    <p><strong>Ingredients:</strong></p>
+        <ul>
+            {% for ingredient in recipe.ingredients.split('\n') %}
+            {% if ingredient.strip() %}
+            <li>{{ ingredient }}</li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    <p><strong>Instructions:</strong></p>
+        <ol>
+            {% for step in recipe.instructions.split('\n') %}
+            {% if step.strip() %}
+            <li>{{ step }}</li>
+            {% endif %}
+            {% endfor %}
+        </ol>
 
 <form action="{{ url_for('favorite_recipe', recipe_id=recipe.id) }}" method="POST">
     <button type="submit">Add to Favorites</button>

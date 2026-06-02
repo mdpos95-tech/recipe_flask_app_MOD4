@@ -132,9 +132,10 @@ select{
 .recipe-meta{
     background: #fff7ed;
     border-left: 4px solid #d97706;
-    padding: 15px;
-    margin-bottom: 25px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
     border-radius: 8px;
+    display: inline-block;
 }
 
 
@@ -201,4 +202,9 @@ select{
     padding: 20px;
     border-radius: 12px;
     border-left: 4px solid #0f766e;
+}
+
+.recipe-extra{
+    display: none;
+    margin-top: 20px;
 }

@@ -21,6 +21,8 @@
     {% if recipe.image_url %}
     <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}" class="recipe-image">
     {% endif %}
+    <button type="button" class="toggle-details">Show Recipe Details</button>
+    <div class="recipe-extra">
     <p><strong>Created by:</strong> {{ recipe.author.username }}</p>
     <p><strong>Created on:</strong> {{ recipe.created_at.strftime('%d-%m-%Y') }}</p>
     <p><strong>Category:</strong> {{ recipe.category.name }}</p>
@@ -42,5 +44,7 @@
         {% endfor %}
     </ol>
    </div>
+</div>
+
    {% endfor %}
 {% endblock %}
