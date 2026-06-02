@@ -16,8 +16,10 @@
          {% else %}
           <a href="{{ url_for('register') }}">Register</a>
          <a href="{{ url_for('login') }}">Login</a>
+         <a href="{{  url_for('admin')  }}"class="stats-button">📈</a>
          {% endif %}
     </nav>
+
 
 {% with messages = get_flashed_messages(with_categories=True) %}
     {% if messages %}

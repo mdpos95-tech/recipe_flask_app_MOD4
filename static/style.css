@@ -197,8 +197,8 @@ select{
     margin-bottom: 25px;
 }
 
-.instructions-list {
-    background: #fff;
+.instructions-list { 
+  background: #fff;
     padding: 20px;
     border-radius: 12px;
     border-left: 4px solid #0f766e;
@@ -210,10 +210,28 @@ select{
 }
 
 .admin-table{
-    width: 60%;
+    width: 60%; 
     margin: 30px auto;
     border-collapse: collapse;
     background: white;
     border-radius: 10px;
-    
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+
+}
+
+.admin-table th{  
+    background: #0f766e;
+    color: white;
+    padding: 12px;
+}
+
+.admin-table td{
+padding: 12px;
+border-bottom: 1px solid #eee;
+
+}
+
+.admin-table tr:hover {background: #f0edea;
+
 }
