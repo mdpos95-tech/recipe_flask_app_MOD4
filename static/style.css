@@ -188,3 +188,17 @@ select{
     color: #721c24;
     border: 2px solid #f5c6cb;
 }
+
+.ingredients-list {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.instructions-list {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #0f766e;
+}

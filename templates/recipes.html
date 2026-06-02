@@ -27,13 +27,18 @@
     <p><strong>Ingredients:</strong></p>
     <ul>
         {% for ingredient in recipe.ingredients.split('\n') %}
+        {% if ingredient.strip() %}
         <li>{{ ingredient }}</li>
+        {% endif %}
+
         {% endfor %}
     </ul>
     <p><strong>Instructions:</strong></p>
     <ol>
         {% for step in recipe.instructions.split('\n') %}
+        {% if step.strip() %}
         <li>{{ step }}</li>
+        {% endif %}
         {% endfor %}
     </ol>
    </div>
