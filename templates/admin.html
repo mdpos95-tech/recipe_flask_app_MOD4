@@ -2,10 +2,30 @@
 {% block content %}
 <h1>Admin Panel
 </h1>
-<tr></tr>
-<tr></tr>
-<tr></tr>
-<tr></tr>
-<tr></tr>
-<tr></tr>
+<table>
+<tr>
+    <th>Statistic</th>
+    <th>Count</th>
+</tr>
+<tr>
+    <td>Users</td>
+    <td>{{ user_count }}</td>
+</tr>
+<tr>
+    <td>Recipes</td>
+    <td>{{ recipe_count }}</td>
+</tr>
+<tr>
+    <td>Categories</td>
+    <td>{{ category_count }}</td>
+</tr>
+<tr>
+    <td>Favorites</td>
+    <td>{{ favorite_count }}</td>
+</tr>
+<tr>
+    <td>Comments</td>
+    <td>{{ comment_count }}</td>
+</tr>
+</table>
 {% endblock %}
