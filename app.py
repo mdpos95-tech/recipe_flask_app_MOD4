@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
 from flask_migrate import Migrate
 from models import db, User, Category, Recipe, Comment, Favorite, ContactMessage
@@ -36,7 +37,7 @@ def register():
         user = User(
             username=form.username.data,
             email=form.email.data,
-            password_hash=form.password.data
+            password_hash=generate_password_hash(form.password.data)
         )
         db.session.add(user)
         db.session.commit()
