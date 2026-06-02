@@ -16,8 +16,9 @@
          {% else %}
           <a href="{{ url_for('register') }}">Register</a>
          <a href="{{ url_for('login') }}">Login</a>
-         <a href="{{  url_for('admin')  }}"class="stats-button">📈</a>
          {% endif %}
+          <a href="{{  url_for('admin')  }}"class="stats-button">📈Stats</a>
+          <a href="{{ url_for('contact') }}"class="contact-button">☎ Contact</a>
     </nav>
 
 
