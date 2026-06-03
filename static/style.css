@@ -12,26 +12,48 @@ body{
 }
 
 nav{
-    margin-bottom: 20px;
-    background: #d97706;
-    padding: 18px;
-    border-radius: 15px;
+    background: #e89b47;
+    padding: 16px 30px;
+    border-radius: 16px;
     margin: 20px auto;
     width: 90%;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    gap: 35px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    position: relative;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+
 }
+
 
 nav a{
     text-decoration: none;
-    color: #fff;
+    color: #fff7ed;
     font-weight: bold;
     font-size: 18px;
-    transition: 0.3s;
+    margin: 0 18px
+
 }
+
+nav .stats-button,
+nav .contact-button{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+    
+}
+
+
+nav .stats-button {
+    right: 120px;
+}
+
+nav .contact-button{
+    right: 25px;
+}
+
 
 .container{
     background-color: #f8f8f8;
@@ -210,7 +232,7 @@ select{
 }
 
 .admin-table{
-    width: 60%; 
+    width: 420px; 
     margin: 30px auto;
     border-collapse: collapse;
     background: white;
@@ -224,11 +246,13 @@ select{
     background: #0f766e;
     color: white;
     padding: 12px;
+    text-align: left;
 }
 
 .admin-table td{
 padding: 12px;
 border-bottom: 1px solid #eee;
+text-align: left;
 
 }
 
