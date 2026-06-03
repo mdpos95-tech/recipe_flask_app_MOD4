@@ -272,3 +272,70 @@ text-align: left;
     text-decoration: none;
 
 }
+
+@media (max-width:720px) {
+    nav a{
+        font-size: 16px;
+        margin: 0 10px;
+    }
+
+    .recipe{
+        width: 95%;
+        padding: 20px;
+    }
+
+    .hero {
+        padding: 25px;
+    }
+
+    h1{
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 480px){
+    nav{
+        padding: 12px;
+    }
+
+    nav a{
+        display: block;
+        margin: 8px 0;
+        font-size: 15px;
+    }
+
+    .stats-button,
+    .contact-button{
+        position: static;
+        display: inline-block;
+        margin: 5px;
+        transform: none;
+    }
+
+    .recipe{
+        width: 100%;
+        padding: 15px;
+    }
+
+    .recipe img,
+    .recipe-image{
+        width: 100%;
+        height: auto;
+
+    }
+
+    h1{
+        font-size: 1.8rem;
+    }
+
+    h2{
+        font-size: 1.4rem;
+    
+    }
+
+    table {
+        width: 100%;
+        font-size: 14px;
+    }
+    
+}
