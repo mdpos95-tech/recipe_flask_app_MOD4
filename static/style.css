@@ -158,6 +158,19 @@ select{
     margin-bottom: 20px;
     border-radius: 8px;
     display: inline-block;
+    margin-top: 0;
+    width: fit-content;
+    margin: 20px auto;
+
+}
+
+.detail-image{
+    width: 350px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 20px auto;
+    display: block;
 }
 
 

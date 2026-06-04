@@ -3,13 +3,14 @@
 {%- block content -%}
     <h1>{{ recipe.title }}</h1>
      {% if recipe.image_url %}
-        <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}" width="300">
+        <img src="{{ recipe.image_url }}" alt="{{ recipe.title }}" class="detail-image">
     {% endif %}
 
     <div class="recipe-meta">
         <p><strong>Created by:</strong> {{ recipe.author.username }}</p>
         <p><strong>Category:</strong> {{ recipe.category.name }}</p>
     </div>
+
     <p><strong>Ingredients:</strong></p>
         <ul>
             {% for ingredient in recipe.ingredients.split('\n') %}
