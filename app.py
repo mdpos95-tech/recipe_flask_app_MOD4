@@ -26,7 +26,7 @@ login_manager.login_view = "login"
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.route("/")
+@app.route("/") #Displays the Home page.
 def home():
     return render_template("home.html")
 
@@ -64,7 +64,7 @@ def logout():
     flash("You have been successfully logged out.", "success")
     return redirect(url_for("recipes"))
 
-@app.route("/recipes")
+@app.route("/recipes") #Displays all recipes and allows users to search or filter by category.
 def recipes():
     search = request.args.get("search")
     category_id = request.args.get("category")
@@ -95,7 +95,7 @@ def recipe_detail(recipe_id):
         return redirect(url_for("recipe_detail", recipe_id=recipe.id))
     return render_template("recipe_detail.html", recipe=recipe, form=form)
 
-@app.route("/favorite/<int:recipe_id>", methods=["POST"])
+@app.route("/favorite/<int:recipe_id>", methods=["POST"]) #Prevents the users from favouriting the same recipe more than once.
 @login_required
 def favorite_recipe(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
@@ -144,7 +144,7 @@ def delete_recipe(recipe_id):
     flash("Recipe deleted successfully!", "success")
     return redirect(url_for("recipes"))
 
-@app.route("/add-recipe", methods=["GET", "POST"])
+@app.route("/add-recipe", methods=["GET", "POST"]) #Allows a logged in user to add a new recipe to the database.
 @login_required
 def add_recipe():
     form = RecipeForm()
@@ -191,7 +191,7 @@ def edit_recipe(recipe_id):
         form.category_id.data = recipe.category_id
     return render_template("add_recipe.html", form=form)
 
-@app.route('/admin')
+@app.route('/admin') #Displays database statistics for users, recipes, categories, favourites and comments.
 @login_required
 def admin():
 
