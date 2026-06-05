@@ -4,7 +4,7 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
-class User(db.Model, UserMixin): #User table stores registered users and links each user to their recipes, comments and favourites.
+class User(db.Model, UserMixin):  # User table stores registered users and links each user to their recipes, comments and favourites.
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -20,7 +20,7 @@ class Category(db.Model):
 
     recipes = db.relationship("Recipe", backref="category", lazy=True)    
 
-class Recipe(db.Model): #Recipe table stores each recipe and connects it to a user and category using foreign keys.
+class Recipe(db.Model):  # Recipe table stores each recipe and connects it to a user and category using foreign keys.
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150), nullable=False)
     ingredients = db.Column(db.Text, nullable=False)
@@ -42,7 +42,7 @@ class Comment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), nullable=False)    
 
-class Favorite(db.Model): #Favourite table creates a many-to-many relationship between users and recipes.
+class Favorite(db.Model):  # Favourite table creates a many-to-many relationship between users and recipes.
     id = db.Column(db.Integer, primary_key=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
@@ -55,3 +55,4 @@ class ContactMessage(db.Model):
     email = db.Column(db.String(120), nullable=False)
     message = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
