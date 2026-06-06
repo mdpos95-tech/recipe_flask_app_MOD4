@@ -104,6 +104,49 @@ Some of the key concepts I learned inluced:
 
 One of the most valuable aspects of the project was seeing how database theory can be applied within a working web application. Building features such as favourites, comments and recipe management helped me better understand how relationships between tables are used in practice.
 
+## Live deployment //-
+
+The application has been deployed using Render and connected to a PostgreSQL database hosted on Neon.
+
+Live site: https://recipe-flask-app-mod4.onrender.com
+
+## Deployment notes //-
+
+The project is deployed as a Render Web Service. The application uses environment variables for sensitive configuration values including:
+- 'DATABASE_URL'
+- 'SECRET_KEY'
+
+These values are not stored in the GitHub repository. They are added securely through the Render dashboard.
+
+The project also includes a 'requirements.txt' file so Render can install the required Python packages before running the application.
+
+## Testing //-
+
+The application was tested locally and after deployment on Render.
+
+Tested features include:
+- User registration
+- User login and logout
+- Adding recipes
+- Viewing recipes
+- Editing recipes
+- Deleting recipes
+- Searching recipes
+- Filtering recipes by category
+- Adding recipes to favourites
+- Removing recipes from favourites
+- Posting comments
+- Contact form
+- Admin statistics page
+- Responsive layout on desktop, tablet and mobile screen sizes
+
+Due to using Renders free hosting tier, I noticed the first load may take a few seconds while the service starts. Once loaded, the application functions correctly.
+
+## Validation //-
+
+HTML, CSS and JavaScript were checked as part of the final testing process to identify and fix any obvious errors before submission.
+
+
 
 # Author //-
 
